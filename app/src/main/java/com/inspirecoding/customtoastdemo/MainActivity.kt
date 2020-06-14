@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.Gravity
 import android.widget.TextView
 import android.widget.Toast
+import com.inspirecoding.customtoastdemo.util.showCustomToast
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity()
@@ -17,8 +18,12 @@ class MainActivity : AppCompatActivity()
         btn_defaultToast.setOnClickListener {
             showPositionedToast(et_message.text.toString().trim())
         }
-        btn_customToast.setOnClickListener {
-            showCustomToast(et_message.text.toString().trim())
+        btn_customToast.setOnClickListener {_button ->
+//            showCustomToast(et_message.text.toString().trim())
+            Toast(this).showCustomToast (
+                et_message.text.toString().trim(),
+                this
+            )
         }
     }
 
@@ -53,8 +58,7 @@ class MainActivity : AppCompatActivity()
         val textView = layout.findViewById<TextView>(R.id.tv_message)
         textView.text = message
 
-        val toast = Toast(applicationContext)
-        toast.apply {
+        Toast(this).apply {
             setGravity(Gravity.BOTTOM, 0, 40)
             duration = Toast.LENGTH_LONG
             view = layout
